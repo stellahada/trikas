@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>escolha com sabedoria</title>
+    <style>
+      @keyframes colorChange {
+            0% { color: red; }
+            20% { color: orange; }
+            40% { color: yellow; }
+            60% { color: green; }
+            80% { color: blue; }
+            100% { color: purple; }
+        }
+
+        body {
+            background-image: "trikas.png";
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .question {
+
+            font-size: 3em;
+            margin-bottom: 20px;
+            animation: colorChange 5s infinite;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        #noButton {
+            transition: 0.5s;
+        }
+		
+		@media screen and (max-width: 600px) {
+		.question {
+		font-size: 2em;
+	}}
+    </style>
+</head>
+<body>
+    
+    <div class="question">qual o melhor time de todos os tempos??</div>
+    <div class="buttons">
+        <button id="yesButton" onclick="yes()">São Paulo</button>
+        <button id="noButton">curintias</button>
+    </div>
+
+    <audio id="saoPauloHino" src="hino_do_sao_paulo.mp3" preload="auto"></audio>
+
+    <div id="imageContainer" style="display: none;">
+        <img id="saoPauloImage" src="trikas.png" alt="São Paulo FC">
+    </div>
+
+    <script>
+        const noButton = document.getElementById('noButton');
+        const maxDisplacement = 500;
+
+        function yes() {
+            const questionText = document.querySelector('.question');
+            questionText.textContent = "ISSO AI!! 😍 AQUI É TRIKAS ❤️🖤";
+
+            const saoPauloHino = document.getElementById('saoPauloHino');
+            saoPauloHino.play();
+
+            const imageContainer = document.getElementById('imageContainer');
+            imageContainer.style.display = 'block';
+
+            const buttonsContainer = document.querySelector('.buttons');
+            buttonsContainer.style.display = 'none';
+        }
+
+        function moveButton() {
+            const maxX = Math.min(window.innerWidth - this.offsetWidth, this.offsetLeft + maxDisplacement);
+            const maxY = Math.min(window.innerHeight - this.offsetHeight, this.offsetTop + maxDisplacement);
+
+            this.style.transform = `translate(${Math.random() * maxX - this.offsetLeft}px, ${Math.random() * maxY - this.offsetTop}px)`;
+        }
+
+        noButton.addEventListener('mouseenter', moveButton);
+        noButton.addEventListener('click', moveButton);
+    </script>
+
+</body>
+</html>
